@@ -1,9 +1,10 @@
 import tomJerryNibbles.*
 
 describe "Grupo de test" {
-
-test "Al inicio, la velocidad máxima de Tom es 10" {
+//PARTE 1
+test "Al inicio, la velocidad máxima de Tom es 10 y su energia es 50" {
   assert.equals(10, tom.velocidadMaxima())
+  assert.equals(50, tom.energia())
 }
 
 test "si come a jerry la velocidad maxima pasa a ser 15.2 y la energia a 102"{
@@ -17,6 +18,48 @@ test "ahora correr 24 mts y la velocidad debe ser 14 y energia 90" {
   tom.correr(24)
   assert.equals(14, tom.velocidadMaxima())
   assert.equals(90, tom.energia())
+}
+
+test "si come a nibbles, pasa a tener velocidad maxima 18.7 y su energia es 137" {
+  tom.comerA(jerry)
+  tom.correr(24)
+  tom.comerA(nibbles)
+  assert.equals(18.7, tom.velocidadMaxima())
+  assert.equals(137, tom.energia())
+}
+
+test "jerry cumple año, tom lo vuelve a comer, su velocidad pasa a 25.9 y energia 209" {
+  tom.comerA(jerry)
+  tom.correr(24)
+  tom.comerA(nibbles)
+  jerry.cumplirAnio()
+  tom.comerA(jerry)
+  assert.equals(25.9, tom.velocidadMaxima())
+  assert.equals(209, tom.energia())
+}
+
+test "tom corre 38 metros, su velocidad es 24 y su energia sera 190" {
+  tom.comerA(jerry)
+  tom.correr(24)
+  tom.comerA(nibbles)
+  jerry.cumplirAnio()
+  tom.comerA(jerry)
+  tom.correr(38)
+  assert.equals(24, tom.velocidadMaxima())
+  assert.equals(190, tom.energia())
+}
+//PARTE 2
+test "puede cazar un raton en distancia 20" {
+  assert.that(tom.puedeCazar(20))
+}
+
+test "tom no puede cazar un raton a 60 metros de distancia" {
+  assert.notThat(tom.puedeCazar(60))
+}
+
+test "tom caza a jerry a una distancia de 40 metros dejando su energia en 82" {
+  tom.cazarRaton(jerry, 40)
+  assert.equals(82, tom.energia())
 }
 
 }
